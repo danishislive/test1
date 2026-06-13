@@ -1,11 +1,268 @@
-<html>
-  <head>
-    <title>This is a test website title</title>
-  </head>
-  <body>
-    <h1>
-      Hello Guys
-    </h1>
-    <p>Hello world this is a test website paragraph!!</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Favorite Person ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ffe6ec,#fff5f7);
+    color:#333;
+    overflow-x:hidden;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
+}
+
+.hero h1{
+    font-family:'Dancing Script',cursive;
+    font-size:4rem;
+    color:#ff4d88;
+    margin-bottom:10px;
+}
+
+.hero p{
+    max-width:600px;
+    font-size:1.1rem;
+    opacity:.8;
+}
+
+.heart{
+    font-size:3rem;
+    animation:beat 1.2s infinite;
+    margin:20px 0;
+}
+
+@keyframes beat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+.album-section{
+    padding:60px 20px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:2rem;
+    margin-bottom:30px;
+    color:#ff4d88;
+}
+
+.album{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+    background:white;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    display:block;
+}
+
+.caption{
+    padding:15px;
+    text-align:center;
+    font-size:.95rem;
+}
+
+.message{
+    max-width:800px;
+    margin:60px auto;
+    text-align:center;
+    padding:30px;
+}
+
+.message h2{
+    font-family:'Dancing Script',cursive;
+    color:#ff4d88;
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.message p{
+    line-height:1.8;
+    font-size:1.05rem;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#666;
+}
+
+.floating-heart{
+    position:fixed;
+    color:#ff7aa8;
+    animation:floatUp 8s linear infinite;
+    pointer-events:none;
+    opacity:.6;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    20%{
+        opacity:.8;
+    }
+    to{
+        transform:translateY(-100px);
+        opacity:0;
+    }
+}
+
+@media(max-width:600px){
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .card img{
+        height:240px;
+    }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="heart">❤️</div>
+    <h1>For Someone Special</h1>
+    <p>
+        Every picture tells a story, but your smile tells my favorite one.
+    </p>
+</section>
+
+<section class="album-section">
+    <h2 class="section-title">Beautiful Memories ✨</h2>
+
+    <div class="album">
+
+        <div class="card">
+            <img src="images/photo1.jpg" alt="">
+            <div class="caption">Your smile lights up every moment.</div>
+        </div>
+
+        <div class="card">
+            <img src="images/photo2.jpg" alt="">
+            <div class="caption">A little sunshine in human form.</div>
+        </div>
+
+        <div class="card">
+            <img src="images/photo3.jpg" alt="">
+            <div class="caption">Elegance in every frame.</div>
+        </div>
+
+        <div class="card">
+            <img src="images/photo4.jpg" alt="">
+            <div class="caption">The kind of beauty that feels effortless.</div>
+        </div>
+
+        <div class="card">
+            <img src="images/photo5.jpg" alt="">
+            <div class="caption">One photo, a thousand reasons to smile.</div>
+        </div>
+
+        <div class="card">
+            <img src="images/photo6.jpg" alt="">
+            <div class="caption">Absolutely unforgettable.</div>
+        </div>
+
+    </div>
+</section>
+
+<section class="message">
+    <h2>Just For You ❤️</h2>
+    <p>
+        This little album is a collection of moments that deserve to be remembered.
+        Every photo carries its own charm, but together they tell a story of someone
+        genuinely special. Thank you for bringing so much positivity, beauty, and
+        happiness wherever you go.
+    </p>
+</section>
+
+<footer>
+    Made with ❤️ especially for you
+</footer>
+
+<script>
+
+// Floating hearts animation
+function createHeart(){
+    const heart=document.createElement('div');
+    heart.classList.add('floating-heart');
+    heart.innerHTML='❤';
+
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.fontSize=(Math.random()*20+15)+'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },8000);
+}
+
+setInterval(createHeart,500);
+
+// Album card animation
+const cards=document.querySelectorAll('.card');
+
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.animate([
+                {opacity:0,transform:'translateY(50px)'},
+                {opacity:1,transform:'translateY(0)'}
+            ],{
+                duration:700,
+                fill:'forwards'
+            });
+        }
+    });
+});
+
+cards.forEach(card=>{
+    card.style.opacity=0;
+    observer.observe(card);
+});
+
+</script>
+
+</body>
 </html>
