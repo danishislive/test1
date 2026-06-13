@@ -1,268 +1,319 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Favorite Person ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--p:#e0529a;--pl:#fce8f3;--pm:#f9afd4;}
+body{font-family:'Nunito',sans-serif;background:transparent;}
 
-body{
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#ffe6ec,#fff5f7);
-    color:#333;
-    overflow-x:hidden;
-}
+#name-banner{text-align:center;padding:36px 20px 10px;position:relative;}
+#name-edit-wrap{display:inline-flex;align-items:center;gap:8px;background:var(--pl);border:1.5px dashed var(--pm);border-radius:999px;padding:8px 20px;cursor:pointer;}
+#crush-name-display{font-family:'Dancing Script',cursive;font-size:2rem;color:var(--p);min-width:80px;outline:none;border:none;background:transparent;text-align:center;}
+#name-hint{font-size:.75rem;color:var(--p);opacity:.7;}
+#edit-icon{font-size:1rem;color:var(--p);cursor:pointer;}
+#tagline{text-align:center;font-size:.9rem;color:var(--color-text-secondary);margin:6px 0 0;font-style:italic;}
 
-.hero{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:30px;
-}
+#sticker-strip{display:flex;justify-content:center;gap:16px;padding:12px 20px;flex-wrap:wrap;}
+.sticker{font-size:1.6rem;cursor:pointer;transition:.2s;user-select:none;display:inline-block;}
+.sticker:hover{transform:scale(1.35) rotate(10deg);}
+.sticker.active{transform:scale(1.3);filter:drop-shadow(0 0 4px var(--pm));}
 
-.hero h1{
-    font-family:'Dancing Script',cursive;
-    font-size:4rem;
-    color:#ff4d88;
-    margin-bottom:10px;
-}
+#album-wrap{padding:16px 14px 10px;max-width:860px;margin:auto;}
+#grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;}
 
-.hero p{
-    max-width:600px;
-    font-size:1.1rem;
-    opacity:.8;
-}
+.pcard{border-radius:16px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);overflow:hidden;cursor:pointer;transition:transform .25s;}
+.pcard:hover{transform:translateY(-5px) rotate(-1deg);}
+.pcard.hidden{display:none;}
+.thumb-box{width:100%;height:190px;background:var(--pl);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:relative;overflow:hidden;}
+.thumb-emoji{font-size:3.2rem;transition:.3s;}
+.pcard:hover .thumb-emoji{transform:scale(1.15);}
+.add-photo-label{font-size:.68rem;color:var(--p);opacity:.7;}
+.heart-btn{position:absolute;top:7px;right:9px;font-size:1.1rem;cursor:pointer;transition:.15s;}
+.heart-btn:hover{transform:scale(1.3);}
+.tag-pill{position:absolute;bottom:7px;left:9px;background:var(--pm);color:#72243E;font-size:.62rem;border-radius:999px;padding:2px 9px;font-weight:600;}
+.pcaption{padding:10px 12px;font-size:.78rem;color:var(--color-text-secondary);text-align:center;min-height:36px;}
 
-.heart{
-    font-size:3rem;
-    animation:beat 1.2s infinite;
-    margin:20px 0;
-}
+.add-card{border:1.5px dashed var(--pm);background:var(--pl);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:240px;border-radius:16px;cursor:pointer;transition:.2s;color:var(--p);font-size:.8rem;}
+.add-card:hover{background:#f4c0d1;transform:scale(1.02);}
 
-@keyframes beat{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-}
+#lb-wrap{display:none;min-height:480px;background:rgba(0,0,0,.6);align-items:center;justify-content:center;border-radius:16px;margin:10px 14px;}
+#lb-wrap.open{display:flex;}
+#lb-box{background:var(--color-background-primary);border-radius:20px;padding:28px 24px;max-width:380px;width:90%;text-align:center;position:relative;}
+#lb-emoji{font-size:5rem;margin-bottom:10px;}
+#lb-cap{font-family:'Dancing Script',cursive;font-size:1.5rem;color:var(--p);margin-bottom:6px;}
+#lb-note{font-size:.85rem;color:var(--color-text-secondary);margin-bottom:16px;line-height:1.6;}
+#lb-close{position:absolute;top:10px;right:14px;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--color-text-secondary);}
+#lb-nav{display:flex;gap:10px;justify-content:center;}
+.lbn{border:1.5px solid var(--p);background:none;color:var(--p);border-radius:999px;padding:6px 18px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.82rem;transition:.2s;}
+.lbn:hover{background:var(--p);color:#fff;}
 
-.album-section{
-    padding:60px 20px;
-}
+#love-note-sec{margin:18px 14px 0;background:var(--pl);border-radius:16px;padding:20px;border:0.5px solid var(--pm);}
+#ln-title{font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--p);margin-bottom:10px;text-align:center;}
+#ln-text{font-size:.88rem;color:var(--color-text-secondary);line-height:1.8;text-align:center;min-height:40px;}
+#ln-input-wrap{margin-top:12px;display:flex;gap:8px;}
+#ln-input{flex:1;padding:9px 14px;border-radius:10px;border:1px solid var(--pm);font-family:'Nunito',sans-serif;font-size:.85rem;background:var(--color-background-primary);color:var(--color-text-primary);}
+#ln-btn{border:1.5px solid var(--p);background:none;color:var(--p);border-radius:999px;padding:8px 18px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.82rem;white-space:nowrap;transition:.2s;}
+#ln-btn:hover{background:var(--p);color:#fff;}
 
-.section-title{
-    text-align:center;
-    font-size:2rem;
-    margin-bottom:30px;
-    color:#ff4d88;
-}
+#mood-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:14px 14px 0;}
+.mbtn{border:1.5px solid var(--pm);background:var(--color-background-primary);color:var(--p);border-radius:999px;padding:5px 16px;font-size:.78rem;cursor:pointer;font-family:'Nunito',sans-serif;transition:.2s;}
+.mbtn.active,.mbtn:hover{background:var(--p);color:#fff;border-color:var(--p);}
 
-.album{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:18px;
-    max-width:1200px;
-    margin:auto;
-}
+#counter-bar{display:flex;gap:10px;justify-content:center;padding:14px 14px 0;flex-wrap:wrap;}
+.cstat{background:var(--color-background-secondary);border-radius:10px;padding:8px 18px;text-align:center;}
+.cstat-n{font-size:1.3rem;font-weight:600;color:var(--p);}
+.cstat-l{font-size:.7rem;color:var(--color-text-secondary);margin-top:2px;}
 
-.card{
-    position:relative;
-    overflow:hidden;
-    border-radius:20px;
-    background:white;
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
-    transition:.4s;
-}
+#footer{text-align:center;padding:18px;font-size:.75rem;color:var(--color-text-secondary);}
 
-.card:hover{
-    transform:translateY(-8px);
-}
+.sparkle-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.sp{position:absolute;width:6px;height:6px;background:var(--p);border-radius:50%;animation:spAnim .7s ease-out forwards;}
+@keyframes spAnim{to{opacity:0;transform:translateY(-30px) scale(0);}}
 
-.card img{
-    width:100%;
-    height:280px;
-    object-fit:cover;
-    display:block;
-}
-
-.caption{
-    padding:15px;
-    text-align:center;
-    font-size:.95rem;
-}
-
-.message{
-    max-width:800px;
-    margin:60px auto;
-    text-align:center;
-    padding:30px;
-}
-
-.message h2{
-    font-family:'Dancing Script',cursive;
-    color:#ff4d88;
-    font-size:3rem;
-    margin-bottom:15px;
-}
-
-.message p{
-    line-height:1.8;
-    font-size:1.05rem;
-}
-
-footer{
-    text-align:center;
-    padding:30px;
-    color:#666;
-}
-
-.floating-heart{
-    position:fixed;
-    color:#ff7aa8;
-    animation:floatUp 8s linear infinite;
-    pointer-events:none;
-    opacity:.6;
-}
-
-@keyframes floatUp{
-    from{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-    20%{
-        opacity:.8;
-    }
-    to{
-        transform:translateY(-100px);
-        opacity:0;
-    }
-}
-
-@media(max-width:600px){
-    .hero h1{
-        font-size:3rem;
-    }
-
-    .card img{
-        height:240px;
-    }
-}
+#caption-modal-wrap{display:none;min-height:300px;background:rgba(0,0,0,.5);align-items:center;justify-content:center;border-radius:16px;margin:0 14px;}
+#caption-modal-wrap.open{display:flex;}
+#caption-modal{background:var(--color-background-primary);border-radius:16px;padding:24px;width:90%;max-width:360px;}
+#cm-title{font-family:'Dancing Script',cursive;font-size:1.3rem;color:var(--p);margin-bottom:12px;text-align:center;}
+.cm-input{width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--pm);font-family:'Nunito',sans-serif;font-size:.85rem;background:var(--color-background-primary);color:var(--color-text-primary);margin-bottom:10px;}
+#cm-emoji-pick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.ep{font-size:1.5rem;cursor:pointer;padding:4px;border-radius:8px;border:1.5px solid transparent;transition:.15s;}
+.ep:hover,.ep.sel{border-color:var(--p);background:var(--pl);}
+.cm-btns{display:flex;gap:8px;justify-content:flex-end;}
+.cm-btn{border:1.5px solid var(--p);background:none;color:var(--p);border-radius:999px;padding:6px 16px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.8rem;transition:.2s;}
+.cm-btn.fill{background:var(--p);color:#fff;}
+.cm-btn:hover{background:var(--p);color:#fff;}
 </style>
-</head>
-<body>
 
-<section class="hero">
-    <div class="heart">❤️</div>
-    <h1>For Someone Special</h1>
-    <p>
-        Every picture tells a story, but your smile tells my favorite one.
-    </p>
-</section>
+<h2 class="sr-only">An interactive photo album for your crush, with editable name, mood tags, captions, and love notes.</h2>
 
-<section class="album-section">
-    <h2 class="section-title">Beautiful Memories ✨</h2>
+<div id="name-banner">
+  <div id="name-edit-wrap" onclick="focusName()">
+    <span id="edit-icon">✏️</span>
+    <input id="crush-name-display" value="Your Name" maxlength="20" title="Type their name" />
+  </div>
+  <p id="tagline">a little album made just for you</p>
+</div>
 
-    <div class="album">
+<div id="sticker-strip">
+  <span class="sticker" onclick="stampSticker(this,'🌸')">🌸</span>
+  <span class="sticker" onclick="stampSticker(this,'🦋')">🦋</span>
+  <span class="sticker" onclick="stampSticker(this,'🌙')">🌙</span>
+  <span class="sticker" onclick="stampSticker(this,'🍓')">🍓</span>
+  <span class="sticker" onclick="stampSticker(this,'✨')">✨</span>
+  <span class="sticker" onclick="stampSticker(this,'🌻')">🌻</span>
+  <span class="sticker" onclick="stampSticker(this,'💌')">💌</span>
+  <span class="sticker" onclick="stampSticker(this,'🎀')">🎀</span>
+</div>
 
-        <div class="card">
-            <img src="photos/image1.jpg" alt="">
-            <div class="caption">Your smile lights up every moment.</div>
-        </div>
+<div id="mood-bar">
+  <button class="mbtn active" onclick="filterMood('all',this)">All</button>
+  <button class="mbtn" onclick="filterMood('cute',this)">Cute</button>
+  <button class="mbtn" onclick="filterMood('pretty',this)">Pretty</button>
+  <button class="mbtn" onclick="filterMood('fun',this)">Fun</button>
+  <button class="mbtn" onclick="filterMood('dreamy',this)">Dreamy</button>
+</div>
 
-        <div class="card">
-            <img src="photos/image2.jpg" alt="">
-            <div class="caption">A little sunshine in human form.</div>
-        </div>
+<div id="counter-bar">
+  <div class="cstat"><div class="cstat-n" id="cnt-photos">6</div><div class="cstat-l">photos</div></div>
+  <div class="cstat"><div class="cstat-n" id="cnt-hearts">0</div><div class="cstat-l">hearts given</div></div>
+  <div class="cstat"><div class="cstat-n" id="cnt-notes">1</div><div class="cstat-l">love notes</div></div>
+</div>
 
-        <!-- <div class="card">
-            <img src="images/photo3.jpg" alt="">
-            <div class="caption">Elegance in every frame.</div>
-        </div>
+<div id="album-wrap">
+  <div id="grid"></div>
+</div>
 
-        <div class="card">
-            <img src="images/photo4.jpg" alt="">
-            <div class="caption">The kind of beauty that feels effortless.</div>
-        </div>
-
-        <div class="card">
-            <img src="images/photo5.jpg" alt="">
-            <div class="caption">One photo, a thousand reasons to smile.</div>
-        </div>
-
-        <div class="card">
-            <img src="images/photo6.jpg" alt="">
-            <div class="caption">Absolutely unforgettable.</div>
-        </div> -->
-
+<div id="caption-modal-wrap">
+  <div id="caption-modal">
+    <div id="cm-title">Add a photo moment</div>
+    <div id="cm-emoji-pick">
+      <span class="ep sel" onclick="pickEmoji(this,'🌸')">🌸</span>
+      <span class="ep" onclick="pickEmoji(this,'🦋')">🦋</span>
+      <span class="ep" onclick="pickEmoji(this,'🌙')">🌙</span>
+      <span class="ep" onclick="pickEmoji(this,'💫')">💫</span>
+      <span class="ep" onclick="pickEmoji(this,'🍓')">🍓</span>
+      <span class="ep" onclick="pickEmoji(this,'🌻')">🌻</span>
+      <span class="ep" onclick="pickEmoji(this,'🌷')">🌷</span>
+      <span class="ep" onclick="pickEmoji(this,'🎀')">🎀</span>
     </div>
-</section>
+    <input class="cm-input" id="cm-caption" placeholder="Caption (e.g. Your smile is my fav)" maxlength="50"/>
+    <input class="cm-input" id="cm-note" placeholder="Secret note (shown in lightbox)" maxlength="80"/>
+    <select class="cm-input" id="cm-mood">
+      <option value="cute">Cute</option>
+      <option value="pretty">Pretty</option>
+      <option value="fun">Fun</option>
+      <option value="dreamy">Dreamy</option>
+    </select>
+    <div class="cm-btns">
+      <button class="cm-btn" onclick="closeModal()">Cancel</button>
+      <button class="cm-btn fill" onclick="saveCard()">Add</button>
+    </div>
+  </div>
+</div>
 
-<section class="message">
-    <h2>Just For You ❤️</h2>
-    <p>
-        This little album is a collection of moments that deserve to be remembered.
-        Every photo carries its own charm, but together they tell a story of someone
-        genuinely special. Thank you for bringing so much positivity, beauty, and
-        happiness wherever you go.
-    </p>
-</section>
+<div id="lb-wrap">
+  <div id="lb-box">
+    <button id="lb-close" onclick="closeLb()">✕</button>
+    <div id="lb-emoji"></div>
+    <div id="lb-cap"></div>
+    <div id="lb-note"></div>
+    <div id="lb-nav">
+      <button class="lbn" onclick="lbNav(-1)">Prev</button>
+      <button class="lbn" onclick="lbNav(1)">Next</button>
+    </div>
+  </div>
+</div>
 
-<footer>
-    Made with ❤️ especially for you
-</footer>
+<div id="love-note-sec">
+  <div id="ln-title">Love note 💌</div>
+  <div id="ln-text">Every time I see you, I forget what I was thinking about. And honestly? Worth it.</div>
+  <div id="ln-input-wrap">
+    <input id="ln-input" placeholder="Write your own love note..." maxlength="120"/>
+    <button id="ln-btn" onclick="saveLoveNote()">Save</button>
+  </div>
+</div>
+
+<div id="footer">Made with way too many feelings 💕</div>
 
 <script>
+const photos=[
+  {emoji:'🌸',caption:'Every smile of yours is contagious.',note:'I genuinely cannot focus when you smile.',mood:'cute',liked:false},
+  {emoji:'🦋',caption:'Effortlessly pretty, always.',note:'No one else even compares, honestly.',mood:'pretty',liked:false},
+  {emoji:'🌙',caption:'You have a dreamy kind of energy.',note:'The kind of person who makes you believe in magic.',mood:'dreamy',liked:false},
+  {emoji:'🍓',caption:'Goofing around looks good on you.',note:'Your laugh is literally my favorite sound.',mood:'fun',liked:false},
+  {emoji:'💫',caption:'Genuinely one of a kind.',note:"There's nobody else like you, I swear.",mood:'cute',liked:false},
+  {emoji:'🌷',caption:'The prettiest, no contest.',note:'Rent free in my head 24/7.',mood:'pretty',liked:false},
+];
+let currentMood='all';
+let lbIdx=0;
+let selectedEmoji='🌸';
+let totalHearts=0;
+let noteCount=1;
 
-// Floating hearts animation
-function createHeart(){
-    const heart=document.createElement('div');
-    heart.classList.add('floating-heart');
-    heart.innerHTML='❤';
-
-    heart.style.left=Math.random()*100+'vw';
-    heart.style.fontSize=(Math.random()*20+15)+'px';
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },8000);
+function renderGrid(){
+  const grid=document.getElementById('grid');
+  grid.innerHTML='';
+  const filtered=currentMood==='all'?photos:photos.filter(p=>p.mood===currentMood);
+  filtered.forEach((p,fi)=>{
+    const idx=photos.indexOf(p);
+    const card=document.createElement('div');
+    card.className='pcard';
+    card.innerHTML=`<div class="thumb-box" onclick="openLb(${idx})">
+      <div class="sparkle-layer" id="sl-${idx}"></div>
+      <div class="thumb-emoji">${p.emoji}</div>
+      <div class="add-photo-label">tap to open</div>
+      <span class="heart-btn" id="hb-${idx}" onclick="toggleHeart(event,${idx})">${p.liked?'❤️':'🤍'}</span>
+      <span class="tag-pill">${p.mood}</span>
+    </div>
+    <div class="pcaption">${p.caption}</div>`;
+    grid.appendChild(card);
+  });
+  const addCard=document.createElement('div');
+  addCard.className='add-card';
+  addCard.innerHTML='<span style="font-size:1.8rem">📸</span><span>Add a moment</span>';
+  addCard.onclick=openModal;
+  grid.appendChild(addCard);
+  updateCounters();
 }
 
-setInterval(createHeart,500);
+function toggleHeart(e,idx){
+  e.stopPropagation();
+  photos[idx].liked=!photos[idx].liked;
+  if(photos[idx].liked){totalHearts++;spawnSparkles(e.clientX,e.clientY);}
+  else totalHearts=Math.max(0,totalHearts-1);
+  renderGrid();
+}
 
-// Album card animation
-const cards=document.querySelectorAll('.card');
+function spawnSparkles(cx,cy){
+  const layer=document.getElementById('album-wrap');
+  const rect=layer.getBoundingClientRect();
+  for(let i=0;i<8;i++){
+    const s=document.createElement('div');
+    s.className='sp';
+    s.style.left=(cx-rect.left+Math.random()*40-20)+'px';
+    s.style.top=(cy-rect.top+Math.random()*40-20)+'px';
+    s.style.animationDelay=(Math.random()*.3)+'s';
+    layer.style.position='relative';
+    layer.appendChild(s);
+    setTimeout(()=>s.remove(),800);
+  }
+}
 
-const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.animate([
-                {opacity:0,transform:'translateY(50px)'},
-                {opacity:1,transform:'translateY(0)'}
-            ],{
-                duration:700,
-                fill:'forwards'
-            });
-        }
-    });
+function filterMood(m,btn){
+  currentMood=m;
+  document.querySelectorAll('.mbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function openLb(idx){
+  lbIdx=idx;
+  updateLb();
+  document.getElementById('lb-wrap').classList.add('open');
+}
+
+function updateLb(){
+  const p=photos[lbIdx];
+  document.getElementById('lb-emoji').textContent=p.emoji;
+  document.getElementById('lb-cap').textContent=p.caption;
+  document.getElementById('lb-note').textContent=p.note;
+}
+
+function lbNav(d){lbIdx=(lbIdx+d+photos.length)%photos.length;updateLb();}
+function closeLb(){document.getElementById('lb-wrap').classList.remove('open');}
+
+let selectedEmoji2='🌸';
+function openModal(){document.getElementById('caption-modal-wrap').classList.add('open');}
+function closeModal(){document.getElementById('caption-modal-wrap').classList.remove('open');}
+function pickEmoji(el,e){
+  document.querySelectorAll('.ep').forEach(x=>x.classList.remove('sel'));
+  el.classList.add('sel');
+  selectedEmoji2=e;
+}
+
+function saveCard(){
+  const cap=document.getElementById('cm-caption').value.trim()||'A beautiful moment.';
+  const note=document.getElementById('cm-note').value.trim()||'This one is special.';
+  const mood=document.getElementById('cm-mood').value;
+  photos.push({emoji:selectedEmoji2,caption:cap,note:note,mood:mood,liked:false});
+  document.getElementById('cm-caption').value='';
+  document.getElementById('cm-note').value='';
+  closeModal();
+  renderGrid();
+}
+
+function saveLoveNote(){
+  const v=document.getElementById('ln-input').value.trim();
+  if(!v)return;
+  document.getElementById('ln-text').textContent=v;
+  document.getElementById('ln-input').value='';
+  noteCount++;
+  updateCounters();
+  const btn=document.getElementById('ln-btn');
+  btn.textContent='Saved 💕';
+  setTimeout(()=>btn.textContent='Save',1600);
+}
+
+function updateCounters(){
+  document.getElementById('cnt-photos').textContent=photos.length;
+  document.getElementById('cnt-hearts').textContent=totalHearts;
+  document.getElementById('cnt-notes').textContent=noteCount;
+}
+
+function focusName(){document.getElementById('crush-name-display').focus();}
+
+function stampSticker(el,s){
+  el.classList.toggle('active');
+  const tagline=document.getElementById('tagline');
+  tagline.textContent=`${s} a little album made just for you ${s}`;
+  setTimeout(()=>{
+    el.classList.remove('active');
+    tagline.textContent='a little album made just for you';
+  },2000);
+}
+
+document.getElementById('crush-name-display').addEventListener('input',function(){
+  this.style.width=Math.max(80,this.value.length*22)+'px';
 });
 
-cards.forEach(card=>{
-    card.style.opacity=0;
-    observer.observe(card);
-});
-
+renderGrid();
 </script>
-
-</body>
-</html>
